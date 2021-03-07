@@ -10,11 +10,13 @@ import * as MRE from '@microsoft/mixed-reality-extension-sdk';
  * The main class of this app. All the logic goes here.
  */
 export default class Mre01 {
-	private ketEggItem: MRE.Actor = null;
 	private assets: MRE.AssetContainer;
 	// attachedObjects is a Map that stores userIds and the attached object
 	private attachedObjects = new Map<MRE.Guid, MRE.Actor>();
 	private eggsList = new Array<MRE.Actor>();
+	private kitEggItem: MRE.Actor = null;
+	private kitEarsItem: MRE.Actor = null;
+	private objTransform: MRE.ActorTransform;
 
 	constructor(private context: MRE.Context) {
 		this.assets = new MRE.AssetContainer(context);
@@ -32,42 +34,51 @@ export default class Mre01 {
 		console.log("[=] Started...")
 		this.assets = new MRE.AssetContainer(this.context);
 		// spawn a copy of a kit item
-		// 		this.ketEggItem = MRE.Actor.CreateFromLibrary(this.context, {
+		// 		this.kitEggItem = MRE.Actor.CreateFromLibrary(this.context, {
 		// 			// the number below is the item's artifact id.
 		// 			resourceId: 'artifact:1686600160185942682'});
 		for (;;) {
 			// wait one second
 			// setTimeout(() => {this.router.navigate(['/']);}, 1000);
 			// console.log("[=] Waiting...")
-			await this.delay(2000);
+			await this.delay(1000);
 			// find random user UI from attachedobjects dictionary
 			for (let userID of Array.from(this.attachedObjects.keys()) ){
 				console.log("[=] UserID: " + userID )
+				this.kitEarsItem = this.attachedObjects.get(userID);
+				this.objTransform = this.kitEarsItem.transform;
 				// createfrom lirary (egg)
-				this.ketEggItem = MRE.Actor.CreateFromLibrary(this.context, {
+				this.kitEggItem = MRE.Actor.CreateFromLibrary(this.context, {
 					resourceId: 'artifact:1686600160185942682',
 					actor: {
-						attachment: {
-							attachPoint: "spine-bottom",
-							userId: userID
-						},
-						transform: {
-							local: {
-								scale: {x: 1.0, y: 1.0 , z: 1.0 },
-								position: {x: 0.014 , y: -0.3 , z: -0.2 },
-								rotation: MRE.Quaternion.FromEulerAngles(0, 0, 0)
-							}  // local:
-						}  // transform:
+// 						attachment: {
+// 							attachPoint: "spine-bottom",
+// 							userId: userID
+// 						},
+						transform: this.objTransform,
+// 						transform: {
+// 							local: {
+// 								scale: {x: 1.0, y: 1.0 , z: 1.0 },
+// 								position: {x: 0.014 , y: -0.3 , z: -0.2 },
+// 								rotation: MRE.Quaternion.FromEulerAngles(0, 0, 0)
+// 							}  // local:
+// 						}  // transform:
 					}  // actor:
 				});  // CreateFromlibrary
 				// add to eggsList
-				console.log("Detaching: " + this.ketEggItem)
-				this.ketEggItem.detach();
-				this.eggsList.push(this.ketEggItem);
+// 				console.log("Detaching: " + this.kitEggItem);
+// 				this.kitEggItem.detach();
+// 				this.kitEggItem.parentId = MRE.ZeroGuid;
+				this.eggsList.push(this.kitEggItem);
 				// if more than 20 in eggsList, remove first item
-				if (this.eggsList.length > 20) {
-					this.eggsList[0].destroy();
-					delete this.eggsList[0];
+				if (this.eggsList.length > 5) {
+					console.log("Try Destroy " + this.eggsList[0])
+					if (this.eggsList[0]){
+						console.log("Do Destroy " + this.eggsList[0])
+						this.eggsList[0].destroy();
+					}
+					this.eggsList.shift();
+					console.log("List Len: " + this.eggsList.length)
 				}
 			}  // foreach
 		// });
@@ -88,6 +99,7 @@ export default class Mre01 {
 		if(!this.attachedObjects.has(userId)) {
 			// add userId to map, value set with attached Actor
 			// this example is a pin
+			console.log("Attaching " + userId)
 			this.attachedObjects.set(userId, MRE.Actor.CreateFromLibrary(this.context, {
 				resourceId: "artifact:1686600173028901536",
 				actor: {
