@@ -119,11 +119,11 @@ export default class Mre01 {
 							rotation: MRE.Quaternion.FromEulerAngles(-5 * MRE.DegreesToRadians,
 								10 * MRE.DegreesToRadians, 0)
 						}
-					}
+					},
+					subscriptions: ['transform']
 				}
 			});
 			this.attachedObjects.set(userId, myObject);
-			myObject.subscribe("transform");
 		}
 	}
 	private removeObject(userId: MRE.Guid) {
