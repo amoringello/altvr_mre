@@ -31,6 +31,7 @@ export default class Mre01 {
 	private started = async() => {
 		// set up somewhere to store loaded assets (meshes, textures,
 		// animations, gltfs, etc.)
+		let earsPosition: MRE.Vector3;
 		console.log("[=] Started...")
 		this.assets = new MRE.AssetContainer(this.context);
 		// spawn a copy of a kit item
@@ -46,33 +47,30 @@ export default class Mre01 {
 			for (let userID of Array.from(this.attachedObjects.keys()) ){
 				console.log("[=] UserID: " + userID )
 				this.kitEarsItem = this.attachedObjects.get(userID);
-// 				this.objTransform = {
-// 					local: {
-// 						position: this.kitEarsItem.transform.local.position
-// 					},
-// 				};
-				// createfrom lirary (egg)
+				earsPosition = this.kitEarsItem.transform.app.position;
+				// createfromlibrary (egg)
 				this.kitEggItem = MRE.Actor.CreateFromLibrary(this.context, {
 					resourceId: 'artifact:1686600160185942682',
 					actor: {
 // 						attachment: {
-// 							attachPoint: "spine-bottom",
+// 							attachPoint: "hips",
 // 							userId: userID
 // 						},
-// 						transform: this.objTransform,
+// 						grabbable: true,
 						transform: {
 							local: {
 								scale: {x: 1.0, y: 1.0 , z: 1.0 },
-								position: this.kitEarsItem.transform.app.position, //{x: 0.014 , y: -0.3 , z: -0.2 },
+								position: {x :earsPosition['x'],
+									y: earsPosition['y'],
+									z: earsPosition['z'] + 0.1,
+									},
+// 								position: {x: -0.014 , y: -0.6 , z: 0.1 },
 								rotation: MRE.Quaternion.FromEulerAngles(0, 0, 0)
 							}  // local:
 						}  // transform:
 					}  // actor:
 				});  // CreateFromlibrary
 				// add to eggsList
-// 				console.log("Detaching: " + this.kitEggItem);
-// 				this.kitEggItem.detach();
-// 				this.kitEggItem.parentId = MRE.ZeroGuid;
 				this.eggsList.push(this.kitEggItem);
 				// if more than 20 in eggsList, remove first item
 				if (this.eggsList.length > 5) {
@@ -81,6 +79,7 @@ export default class Mre01 {
 // 						console.log("Do Destroy " + this.eggsList[0])
 						this.eggsList[0].destroy();
 					}
+					// Remove first item (shift left)
 					this.eggsList.shift();
 // 					console.log("List Len: " + this.eggsList.length)
 				}
@@ -106,23 +105,25 @@ export default class Mre01 {
 			// this example is a pin
 			console.log("Attaching " + userId)
 			myObject = MRE.Actor.CreateFromLibrary(this.context, {
+				// resource ID for ears
 				resourceId: "artifact:1686600173028901536",
 				actor: {
 					attachment: {
-						attachPoint: "spine-top",
+						attachPoint: "head",
 						userId: userId
 					},
 					transform: {
 						local: {
 							scale: {x: 0.45, y: 0.45 , z: 0.45 },
-							position: {x: 0.014 , y: -0.4 , z: 0.1 },
+							position: {x: -0.014 , y: -0.6 , z: 0.1 },
 							rotation: MRE.Quaternion.FromEulerAngles(-5 * MRE.DegreesToRadians,
 								10 * MRE.DegreesToRadians, 0)
 						}
 					},
-					subscriptions: ['transform']
+// 					subscriptions: ['transform']
 				}
 			});
+			myObject.subscribe('transform');
 			this.attachedObjects.set(userId, myObject);
 		}
 	}
