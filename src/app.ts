@@ -32,6 +32,7 @@ export default class Mre01 {
 		// set up somewhere to store loaded assets (meshes, textures,
 		// animations, gltfs, etc.)
 		let earsPosition: MRE.Vector3;
+		let earsRotation: MRE.Quaternion;
 		console.log("[=] Started...")
 		this.assets = new MRE.AssetContainer(this.context);
 		// spawn a copy of a kit item
@@ -48,6 +49,7 @@ export default class Mre01 {
 				console.log("[=] UserID: " + userID )
 				this.kitEarsItem = this.attachedObjects.get(userID);
 				earsPosition = this.kitEarsItem.transform.app.position;
+				earsRotation = this.kitEarsItem.transform.app.rotation;
 				// createfromlibrary (egg)
 				this.kitEggItem = MRE.Actor.CreateFromLibrary(this.context, {
 					resourceId: 'artifact:1686600160185942682',
@@ -64,8 +66,9 @@ export default class Mre01 {
 									y: earsPosition['y'],
 									z: earsPosition['z'] + 0.1,
 									},
+								rotation: earsRotation,
 // 								position: {x: -0.014 , y: -0.6 , z: 0.1 },
-								rotation: MRE.Quaternion.FromEulerAngles(0, 0, 0)
+// 								rotation: MRE.Quaternion.FromEulerAngles(0, 0, 0)
 							}  // local:
 						}  // transform:
 					}  // actor:
