@@ -76,7 +76,7 @@ export default class Mre01 {
 				// add to eggsList
 				this.eggsList.push(this.kitEggItem);
 				// if more than 20 in eggsList, remove first item
-				if (this.eggsList.length > 5) {
+				if (this.eggsList.length > 800) {
 // 					console.log("Try Destroy " + this.eggsList[0])
 					if (this.eggsList[0]){
 // 						console.log("Do Destroy " + this.eggsList[0])
@@ -123,7 +123,6 @@ export default class Mre01 {
 								10 * MRE.DegreesToRadians, 0)
 						}
 					},
-// 					subscriptions: ['transform']
 				}
 			});
 			myObject.subscribe('transform');
