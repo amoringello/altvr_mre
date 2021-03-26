@@ -13,13 +13,15 @@ export default class Mre01 {
 	private assets: MRE.AssetContainer;
 	// attachedEarsObjects is a Map that stores userIds and the attached object
 	private attachedEarsObjects = new Map<MRE.Guid, MRE.Actor>();
+// 	private userIdsList = new Array<MRE.Guid>();
 	private attachedHipsObjects = new Map<MRE.Guid, MRE.Actor>();
 	private eggsList = new Array<MRE.Actor>();
 	private kitEggItem: MRE.Actor = null;
 	private kitEarsItem: MRE.Actor = null;
 	private kitHipsItem: MRE.Actor = null;
 	private objTransform: MRE.ActorTransform;
-	private MAX_EGGS = 30;
+	private MAX_EGGS = 80;
+	private TIMEOUT_MS = 500;
 
 	constructor(private context: MRE.Context) {
 		this.assets = new MRE.AssetContainer(context);
@@ -32,58 +34,56 @@ export default class Mre01 {
 	 * Once the context is "started", initialize the app.
 	 */
 	private started = async() => {
-		// set up somewhere to store loaded assets (meshes, textures,
-		// animations, gltfs, etc.)
 		let hipsPosition: MRE.Vector3;
 		let hipsRotation: MRE.Quaternion;
+		let userIndex = 0;
+		let userID: MRE.Guid;
+
 		console.log("[=] Started... MAX_EGGS = " + this.MAX_EGGS)
 		this.assets = new MRE.AssetContainer(this.context);
-		// spawn a copy of a kit item
-		// 		this.kitEggItem = MRE.Actor.CreateFromLibrary(this.context, {
-		// 			// the number below is the item's artifact id.
-		// 			resourceId: 'artifact:1686600160185942682'});
 		for (;;) {
 			// wait one second
-			// setTimeout(() => {this.router.navigate(['/']);}, 1000);
-			// console.log("[=] Waiting...")
-			await this.delay(1000);
+			await this.delay(this.TIMEOUT_MS);
+
+			//
 			// find random user UI from attachedEarsObjects dictionary
-			for (let userID of Array.from(this.attachedEarsObjects.keys()) ){
-// 				console.log("[=] UserID: " + userID )
-				this.kitHipsItem = this.attachedHipsObjects.get(userID);
-				hipsPosition = this.kitHipsItem.transform.app.position;
-				hipsRotation = this.kitHipsItem.transform.app.rotation;
-				// createfromlibrary (egg)
-				this.kitEggItem = MRE.Actor.CreateFromLibrary(this.context, {
-					resourceId: 'artifact:1686600160185942682',
-					actor: {
-						transform: {
-							local: {
-								scale: {x: 1.0, y: 1.0 , z: 1.0 },
-								position: {x :hipsPosition['x'],
-									y: hipsPosition['y'],
-									z: hipsPosition['z'] + 0.1,
-									},
-								rotation: hipsRotation,
-							}  // local:
-						}  // transform:
-					}  // actor:
-				});  // CreateFromlibrary
-				// add to eggsList
-				this.eggsList.push(this.kitEggItem);
-				// if more than 20 in eggsList, remove first item
-				if (this.eggsList.length > this.MAX_EGGS) {
-// 					console.log("Try Destroy " + this.eggsList[0])
-					if (this.eggsList[0]){
-// 						console.log("Do Destroy " + this.eggsList[0])
-						this.eggsList[0].destroy();
-					}
-					// Remove first item (shift left)
-					this.eggsList.shift();
-// 					console.log("List Len: " + this.eggsList.length)
-				}
-			}  // foreach
-		// });
+			//
+			let userIdsList = Array.from(this.attachedEarsObjects.keys());  // update in case someone joined or left
+			let userListLen = userIdsList.length;
+			userIndex = ++userIndex % userListLen;  // count up, but wrap when too many
+			userID = userIdsList[userIndex];  // Get the indexed user id
+
+// 			for (let userID of Array.from(this.attachedEarsObjects.keys()) ){
+			this.kitHipsItem = this.attachedHipsObjects.get(userID);
+			hipsPosition = this.kitHipsItem.transform.app.position;
+			hipsRotation = this.kitHipsItem.transform.app.rotation;
+			// createfromlibrary (egg)
+			this.kitEggItem = MRE.Actor.CreateFromLibrary(this.context, {
+				resourceId: 'artifact:1686600160185942682',
+				actor: {
+					transform: {
+						local: {
+							scale: {x: 1.0, y: 1.0 , z: 1.0 },
+							position: {x :hipsPosition['x'],
+								y: hipsPosition['y'],
+								z: hipsPosition['z'] + 0.1,
+								},
+							rotation: hipsRotation,
+						}  // local:
+					}  // transform:
+				}  // actor:
+			});  // CreateFromlibrary
+			// add to eggsList
+			this.eggsList.push(this.kitEggItem);
+			// if more than 20 in eggsList, remove first item
+			if (this.eggsList.length > this.MAX_EGGS) {
+				if (this.eggsList[0]){
+					this.eggsList[0].destroy();
+				}  // (this.eggsList[0])
+				// Remove first item (shift left)
+				this.eggsList.shift();
+			}  // if (this.eggsList.length > this.MAX_EGGS)
+//			}  // foreach
 		}  // for(;;)
 	}  // started()
 
