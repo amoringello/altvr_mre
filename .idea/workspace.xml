@@ -1,22 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="03a46184-9a24-4cbb-b5b0-8ae7f2e2a35d" name="Default Changelist" comment="" />
+    <list default="true" id="03a46184-9a24-4cbb-b5b0-8ae7f2e2a35d" name="Default Changelist" comment="Functional">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1pOsQsmtLJfPW4mvqzAkxLkV4L3" />
   <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
     <option name="autoscrollToSource" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src" />
+    </key>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -29,6 +59,123 @@
       <option name="presentableId" value="Default" />
       <updated>1615065457839</updated>
     </task>
+    <task id="LOCAL-00001" summary="drop and destroy. todo: place correctly">
+      <created>1615140592892</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1615140592892</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Added subscription, but not yet working exactly.">
+      <created>1615154840639</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1615154840639</updated>
+    </task>
+    <task id="LOCAL-00003" summary="It Works!  Todo: Adjust position - too far forward.">
+      <created>1615155318362</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1615155318362</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Minor adjust. Attach to head, not spine.">
+      <created>1615240156668</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1615240156668</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Added rotation of eggs.">
+      <created>1615242303414</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1615242303414</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Functional">
+      <created>1615845824550</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1615845824550</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Now subscribes to invisible attachment.  Much faster response.">
+      <created>1615849927358</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1615849927359</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Now generates one egg for single user every interval.">
+      <created>1616791900134</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1616791900135</updated>
+    </task>
+    <task id="LOCAL-00009" summary="max eggs and timing change">
+      <created>1617537952048</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1617537952048</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="drop and destroy. todo: place correctly" />
+    <MESSAGE value="Added subscription, but not yet working exactly." />
+    <MESSAGE value="It Works!  Todo: Adjust position - too far forward." />
+    <MESSAGE value="Minor adjust. Attach to head, not spine." />
+    <MESSAGE value="Added rotation of eggs." />
+    <MESSAGE value="Functional" />
+    <MESSAGE value="Now subscribes to invisible attachment.  Much faster response." />
+    <MESSAGE value="Now generates one egg for single user every interval." />
+    <MESSAGE value="max eggs and timing change" />
+    <option name="LAST_COMMIT_MESSAGE" value="max eggs and timing change" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="3900" y="277" key="CommitChangelistDialog2" timestamp="1617537951837">
+      <screen x="2560" y="25" width="2560" height="1415" />
+    </state>
+    <state x="3900" y="277" key="CommitChangelistDialog2/2560.25.2560.1415/0.25.2560.1346@2560.25.2560.1415" timestamp="1617537951837" />
+    <state x="2776" y="211" width="1715" height="1089" key="DiffContextDialog" timestamp="1617537922631">
+      <screen x="2560" y="25" width="2560" height="1415" />
+    </state>
+    <state x="151" y="158" width="1200" height="777" key="DiffContextDialog/0.25.1792.1010@0.25.1792.1010" timestamp="1615083288973" />
+    <state x="2776" y="211" width="1715" height="1089" key="DiffContextDialog/2560.25.2560.1415/0.25.2560.1346@2560.25.2560.1415" timestamp="1617537922631" />
+    <state x="3870" y="414" key="Vcs.Push.Dialog.v2" timestamp="1617537954964">
+      <screen x="2560" y="25" width="2560" height="1415" />
+    </state>
+    <state x="3870" y="414" key="Vcs.Push.Dialog.v2/2560.25.2560.1415/0.25.2560.1346@2560.25.2560.1415" timestamp="1617537954964" />
+    <state x="165" y="126" width="2108" height="1007" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1616341903764">
+      <screen x="0" y="25" width="2560" height="1346" />
+    </state>
+    <state x="165" y="126" width="2108" height="1007" key="com.intellij.history.integration.ui.views.FileHistoryDialog/2560.25.2560.1415/0.25.2560.1346@0.25.2560.1346" timestamp="1616341903764" />
+    <state x="2725" y="131" width="2108" height="1058" key="com.intellij.history.integration.ui.views.FileHistoryDialog/2560.25.2560.1415/0.25.2560.1346@2560.25.2560.1415" timestamp="1615320548812" />
+    <state x="4000" y="675" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1617537929519">
+      <screen x="2560" y="25" width="2560" height="1415" />
+    </state>
+    <state x="4000" y="675" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/2560.25.2560.1415/0.25.2560.1346@2560.25.2560.1415" timestamp="1617537929519" />
+    <state x="3940" y="434" width="703" height="486" key="find.popup" timestamp="1615252627531">
+      <screen x="2560" y="25" width="2560" height="1415" />
+    </state>
+    <state x="3940" y="434" width="703" height="486" key="find.popup/2560.25.2560.1415/0.25.2560.1346@2560.25.2560.1415" timestamp="1615252627531" />
   </component>
 </project>
