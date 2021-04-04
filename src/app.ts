@@ -62,11 +62,7 @@ export default class Mre01 {
 					transform: {
 						local: {
 							scale: {x: 1.0, y: 1.0 , z: 1.0 },
-							position: {
-								x: hipsPosition['x'],
-								y: hipsPosition['y'],
-								z: hipsPosition['z'],
-							},
+							position: hipsPosition,
 						}  // local:
 					}  // transform:
 				}  // actor:
@@ -113,7 +109,7 @@ export default class Mre01 {
 					transform: {
 						local: {
 							scale: {x: 0.45, y: 0.45 , z: 0.45 },
-							position: {x: -0.014 , y: -0.6 , z: 0.1 },
+							position: {x: 0.01 , y: -0.6 , z: 0.1 },
 							rotation: MRE.Quaternion.FromEulerAngles(-5 * MRE.DegreesToRadians,
 								10 * MRE.DegreesToRadians, 0)
 						}
@@ -142,7 +138,6 @@ export default class Mre01 {
 					subscriptions: [ 'transform' ],
 				}
 			});
-			//myEarsObject.subscribe('transform');
 			this.attachedHipsObjects.set(userId, myHipsObject);
 		}
 	}
