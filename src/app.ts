@@ -21,7 +21,7 @@ export default class Mre01 {
 	private kitHipsItem: MRE.Actor = null;
 	private objTransform: MRE.ActorTransform;
 	private MAX_EGGS = 80;
-	private TIMEOUT_MS = 500;
+	private TIMEOUT_MS = 300;
 
 	constructor(private context: MRE.Context) {
 		this.assets = new MRE.AssetContainer(context);
@@ -103,7 +103,7 @@ export default class Mre01 {
 		if(!this.attachedEarsObjects.has(userId)) {
 			// add userId to map, value set with attached Actor
 			// this example is a pin
-			console.log("Attaching " + userId)
+			console.log("Attaching: " + userId)
 			// Attach Ears - not subscribed
 			myEarsObject = MRE.Actor.CreateFromLibrary(this.context, {
 				// resource ID for ears
@@ -153,6 +153,8 @@ export default class Mre01 {
 	private removeObject(userId: MRE.Guid) {
 		// if user is stored in map
 		if (this.attachedEarsObjects.has(userId)) {
+			console.log("Destroying: " + userId)
+
 			// destroy the attached actor at key
 			this.attachedEarsObjects.get(userId).destroy();
 			this.attachedHipsObjects.get(userId).destroy();
