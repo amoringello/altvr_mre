@@ -4,7 +4,6 @@
  */
 
 import * as MRE from '@microsoft/mixed-reality-extension-sdk';
-// import { delay } from "./helpers";
 
 /**
  * The main class of this app. All the logic goes here.
@@ -13,7 +12,7 @@ export default class Mre01 {
 	private assets: MRE.AssetContainer;
 	// attachedEarsObjects is a Map that stores userIds and the attached object
 	private attachedEarsObjects = new Map<MRE.Guid, MRE.Actor>();
-// 	private userIdsList = new Array<MRE.Guid>();
+	// private userIdsList = new Array<MRE.Guid>();
 	private attachedHipsObjects = new Map<MRE.Guid, MRE.Actor>();
 	private eggsList = new Array<MRE.Actor>();
 	private kitEggItem: MRE.Actor = null;
@@ -21,7 +20,7 @@ export default class Mre01 {
 	private kitHipsItem: MRE.Actor = null;
 	private objTransform: MRE.ActorTransform;
 	private MAX_EGGS = 80;
-	private TIMEOUT_MS = 300;
+	private TIMEOUT_MS = 500;
 
 	constructor(private context: MRE.Context) {
 		this.assets = new MRE.AssetContainer(context);
@@ -35,28 +34,27 @@ export default class Mre01 {
 	 */
 	private started = async() => {
 		let hipsPosition: MRE.Vector3;
-		let hipsRotation: MRE.Quaternion;
 		let userIndex = 0;
 		let userID: MRE.Guid;
 
-		console.log("[=] Started... MAX_EGGS = " + this.MAX_EGGS)
+		console.log("[=] Started... MAX_EGGS=" + this.MAX_EGGS + ", TIMEOUT=" + this.TIMEOUT_MS)
 		this.assets = new MRE.AssetContainer(this.context);
 		for (;;) {
-			// wait one second
+			// wait TIMEOUT_MS
 			await this.delay(this.TIMEOUT_MS);
 
 			//
-			// find random user UI from attachedEarsObjects dictionary
-			//
-			let userIdsList = Array.from(this.attachedEarsObjects.keys());  // update in case someone joined or left
+			// find next userID index from attachedEarsObjects dictionary
+			let userIdsList = Array.from(this.attachedEarsObjects.keys());
 			let userListLen = userIdsList.length;
+			if (userListLen === 0) {
+				continue;
+			}
 			userIndex = ++userIndex % userListLen;  // count up, but wrap when too many
 			userID = userIdsList[userIndex];  // Get the indexed user id
 
-// 			for (let userID of Array.from(this.attachedEarsObjects.keys()) ){
 			this.kitHipsItem = this.attachedHipsObjects.get(userID);
 			hipsPosition = this.kitHipsItem.transform.app.position;
-			hipsRotation = this.kitHipsItem.transform.app.rotation;
 			// createfromlibrary (egg)
 			this.kitEggItem = MRE.Actor.CreateFromLibrary(this.context, {
 				resourceId: 'artifact:1686600160185942682',
@@ -64,26 +62,26 @@ export default class Mre01 {
 					transform: {
 						local: {
 							scale: {x: 1.0, y: 1.0 , z: 1.0 },
-							position: {x :hipsPosition['x'],
+							position: {
+								x: hipsPosition['x'],
 								y: hipsPosition['y'],
-								z: hipsPosition['z'] + 0.1,
-								},
-							rotation: hipsRotation,
+								z: hipsPosition['z'],
+							},
 						}  // local:
 					}  // transform:
 				}  // actor:
 			});  // CreateFromlibrary
+
 			// add to eggsList
 			this.eggsList.push(this.kitEggItem);
-			// if more than 20 in eggsList, remove first item
+
+			// if more than MAX_EGGS in eggsList, remove first item
 			if (this.eggsList.length > this.MAX_EGGS) {
-				if (this.eggsList[0]){
+				if (this.eggsList[0]) {
 					this.eggsList[0].destroy();
+					this.eggsList.shift();
 				}  // (this.eggsList[0])
-				// Remove first item (shift left)
-				this.eggsList.shift();
 			}  // if (this.eggsList.length > this.MAX_EGGS)
-//			}  // foreach
 		}  // for(;;)
 	}  // started()
 
@@ -96,13 +94,12 @@ export default class Mre01 {
 		this.removeObject(user.id);
 	}
 
-	private attachObject(userId: MRE.Guid){
+	private attachObject(userId: MRE.Guid) {
 		let myEarsObject: MRE.Actor = null;
 		let myHipsObject: MRE.Actor = null;
 		// if this.attachedEarsObjects doesn't already include userId
-		if(!this.attachedEarsObjects.has(userId)) {
+		if( !this.attachedEarsObjects.has(userId) ) {
 			// add userId to map, value set with attached Actor
-			// this example is a pin
 			console.log("Attaching: " + userId)
 			// Attach Ears - not subscribed
 			myEarsObject = MRE.Actor.CreateFromLibrary(this.context, {
@@ -123,9 +120,10 @@ export default class Mre01 {
 					},
 				}
 			});
+			this.attachedEarsObjects.set(userId, myEarsObject);
+
 			// Attach invisible block at hips - subscribed
-			myHipsObject = MRE.Actor.CreatePrimitive(this.assets,
-				{
+			myHipsObject = MRE.Actor.CreatePrimitive(this.assets, {
 				definition: {
 					shape: MRE.PrimitiveShape.Box,
 					dimensions: { x: 0.001, y: 0.001, z: 0.001 }
@@ -133,23 +131,22 @@ export default class Mre01 {
 				actor: {
 					name: "Receptacle",
 					attachment: {
-						attachPoint: "hips",
+						attachPoint: "spine-bottom",
 						userId: userId
 					},
 					transform: {
 						local: {
-							position: { x: 0.0, y: 0.0, z: 0.0
-							}
+							position: { x: 0.0, y: -0.1, z: -0.2 }
 						}
 					},
-					subscriptions: [ 'transform' ]
+					subscriptions: [ 'transform' ],
 				}
 			});
-			myEarsObject.subscribe('transform');
-			this.attachedEarsObjects.set(userId, myEarsObject);
+			//myEarsObject.subscribe('transform');
 			this.attachedHipsObjects.set(userId, myHipsObject);
 		}
 	}
+
 	private removeObject(userId: MRE.Guid) {
 		// if user is stored in map
 		if (this.attachedEarsObjects.has(userId)) {
