@@ -21,6 +21,8 @@
   <component name="ChangeListManager">
     <list default="true" id="03a46184-9a24-4cbb-b5b0-8ae7f2e2a35d" name="Default Changelist" comment="Functional">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/server.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,7 +124,21 @@
       <option name="project" value="LOCAL" />
       <updated>1617537952048</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="fixed attachment and drop location">
+      <created>1617556741026</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1617556741026</updated>
+    </task>
+    <task id="LOCAL-00011" summary="fixed positions">
+      <created>1617557086980</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1617557086980</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -148,22 +164,24 @@
     <MESSAGE value="Now subscribes to invisible attachment.  Much faster response." />
     <MESSAGE value="Now generates one egg for single user every interval." />
     <MESSAGE value="max eggs and timing change" />
-    <option name="LAST_COMMIT_MESSAGE" value="max eggs and timing change" />
+    <MESSAGE value="fixed attachment and drop location" />
+    <MESSAGE value="fixed positions" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed positions" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="3900" y="277" key="CommitChangelistDialog2" timestamp="1617537951837">
+    <state x="3900" y="277" key="CommitChangelistDialog2" timestamp="1617557086816">
       <screen x="2560" y="25" width="2560" height="1415" />
     </state>
-    <state x="3900" y="277" key="CommitChangelistDialog2/2560.25.2560.1415/0.25.2560.1346@2560.25.2560.1415" timestamp="1617537951837" />
-    <state x="2776" y="211" width="1715" height="1089" key="DiffContextDialog" timestamp="1617537922631">
+    <state x="3900" y="277" key="CommitChangelistDialog2/2560.25.2560.1415/0.25.2560.1346@2560.25.2560.1415" timestamp="1617557086816" />
+    <state x="2776" y="211" width="1715" height="1089" key="DiffContextDialog" timestamp="1617554567127">
       <screen x="2560" y="25" width="2560" height="1415" />
     </state>
     <state x="151" y="158" width="1200" height="777" key="DiffContextDialog/0.25.1792.1010@0.25.1792.1010" timestamp="1615083288973" />
-    <state x="2776" y="211" width="1715" height="1089" key="DiffContextDialog/2560.25.2560.1415/0.25.2560.1346@2560.25.2560.1415" timestamp="1617537922631" />
-    <state x="3870" y="414" key="Vcs.Push.Dialog.v2" timestamp="1617537954964">
+    <state x="2776" y="211" width="1715" height="1089" key="DiffContextDialog/2560.25.2560.1415/0.25.2560.1346@2560.25.2560.1415" timestamp="1617554567127" />
+    <state x="3870" y="414" key="Vcs.Push.Dialog.v2" timestamp="1617557088170">
       <screen x="2560" y="25" width="2560" height="1415" />
     </state>
-    <state x="3870" y="414" key="Vcs.Push.Dialog.v2/2560.25.2560.1415/0.25.2560.1346@2560.25.2560.1415" timestamp="1617537954964" />
+    <state x="3870" y="414" key="Vcs.Push.Dialog.v2/2560.25.2560.1415/0.25.2560.1346@2560.25.2560.1415" timestamp="1617557088170" />
     <state x="165" y="126" width="2108" height="1007" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1616341903764">
       <screen x="0" y="25" width="2560" height="1346" />
     </state>

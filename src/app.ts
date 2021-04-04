@@ -19,11 +19,10 @@ export default class Mre01 {
 	private kitEarsItem: MRE.Actor = null;
 	private kitHipsItem: MRE.Actor = null;
 	private objTransform: MRE.ActorTransform;
-	private MAX_EGGS = 80;
-	private TIMEOUT_MS = 500;
 
-	constructor(private context: MRE.Context) {
+	constructor(private context: MRE.Context, private params: MRE.ParameterSet) {
 		this.assets = new MRE.AssetContainer(context);
+		this.params = params;
 		this.context.onStarted(() => this.started());
 		this.context.onUserJoined(user => this.userJoined(user));
 		this.context.onUserLeft(user => this.userLeft(user));
@@ -36,14 +35,24 @@ export default class Mre01 {
 		let hipsPosition: MRE.Vector3;
 		let userIndex = 0;
 		let userID: MRE.Guid;
+		let MAX_EGGS: number;
+		let TIMEOUT_MS: number;
 
-		console.log("[=] Started... MAX_EGGS=" + this.MAX_EGGS + ", TIMEOUT=" + this.TIMEOUT_MS)
+		if (this.params["eggs"]) {
+			MAX_EGGS = Number(this.params["eggs"]);
+		}
+		else { MAX_EGGS = 79; }
+		if (this.params["timeout"]) { 
+			TIMEOUT_MS = Number(this.params["timeout"]);
+		}
+		else { TIMEOUT_MS = 501;}
+
+		console.log("[=] Started... MAX_EGGS=" + MAX_EGGS + ", TIMEOUT=" + TIMEOUT_MS)
 		this.assets = new MRE.AssetContainer(this.context);
 		for (;;) {
 			// wait TIMEOUT_MS
-			await this.delay(this.TIMEOUT_MS);
+			await this.delay(TIMEOUT_MS);
 
-			//
 			// find next userID index from attachedEarsObjects dictionary
 			let userIdsList = Array.from(this.attachedEarsObjects.keys());
 			let userListLen = userIdsList.length;
@@ -62,11 +71,7 @@ export default class Mre01 {
 					transform: {
 						local: {
 							scale: {x: 1.0, y: 1.0 , z: 1.0 },
-							position: {
-								x: hipsPosition['x'],
-								y: hipsPosition['y'],
-								z: hipsPosition['z'],
-							},
+							position: hipsPosition,
 						}  // local:
 					}  // transform:
 				}  // actor:
@@ -76,7 +81,7 @@ export default class Mre01 {
 			this.eggsList.push(this.kitEggItem);
 
 			// if more than MAX_EGGS in eggsList, remove first item
-			if (this.eggsList.length > this.MAX_EGGS) {
+			if (this.eggsList.length > MAX_EGGS) {
 				if (this.eggsList[0]) {
 					this.eggsList[0].destroy();
 					this.eggsList.shift();
@@ -113,7 +118,7 @@ export default class Mre01 {
 					transform: {
 						local: {
 							scale: {x: 0.45, y: 0.45 , z: 0.45 },
-							position: {x: -0.014 , y: -0.6 , z: 0.1 },
+							position: {x: 0.01 , y: -0.6 , z: 0.1 },
 							rotation: MRE.Quaternion.FromEulerAngles(-5 * MRE.DegreesToRadians,
 								10 * MRE.DegreesToRadians, 0)
 						}
@@ -142,7 +147,6 @@ export default class Mre01 {
 					subscriptions: [ 'transform' ],
 				}
 			});
-			//myEarsObject.subscribe('transform');
 			this.attachedHipsObjects.set(userId, myHipsObject);
 		}
 	}
