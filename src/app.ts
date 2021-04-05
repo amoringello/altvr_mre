@@ -47,7 +47,6 @@ export default class Mre01 {
 		}
 		else { TIMEOUT_MS = 500;}
 
-		console.log("[=**=] Started... MAX_EGGS=" + MAX_EGGS + ", TIMEOUT=" + TIMEOUT_MS)
 		console.log("[=] Started... MAX_EGGS=" + MAX_EGGS + ", TIMEOUT=" + TIMEOUT_MS)
 		this.assets = new MRE.AssetContainer(this.context);
 		for (;;) {
