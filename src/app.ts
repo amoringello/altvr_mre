@@ -41,12 +41,13 @@ export default class Mre01 {
 		if (this.params["eggs"]) {
 			MAX_EGGS = Number(this.params["eggs"]);
 		}
-		else { MAX_EGGS = 79; }
+		else { MAX_EGGS = 80; }
 		if (this.params["timeout"]) { 
 			TIMEOUT_MS = Number(this.params["timeout"]);
 		}
-		else { TIMEOUT_MS = 501;}
+		else { TIMEOUT_MS = 500;}
 
+		console.log("[=**=] Started... MAX_EGGS=" + MAX_EGGS + ", TIMEOUT=" + TIMEOUT_MS)
 		console.log("[=] Started... MAX_EGGS=" + MAX_EGGS + ", TIMEOUT=" + TIMEOUT_MS)
 		this.assets = new MRE.AssetContainer(this.context);
 		for (;;) {
