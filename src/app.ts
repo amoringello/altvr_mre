@@ -4,11 +4,13 @@
  */
 
 import * as MRE from '@microsoft/mixed-reality-extension-sdk';
+import { UserSyncFix } from './user-sync-fix'
 
 /**
  * The main class of this app. All the logic goes here.
  */
 export default class Mre01 {
+	private syncFix = new UserSyncFix(5000);
 	private assets: MRE.AssetContainer;
 	// attachedEarsObjects is a Map that stores userIds and the attached object
 	private attachedEarsObjects = new Map<MRE.Guid, MRE.Actor>();
@@ -73,7 +75,8 @@ export default class Mre01 {
 							scale: {x: 1.0, y: 1.0 , z: 1.0 },
 							position: hipsPosition,
 						}  // local:
-					}  // transform:
+					},  // transform:
+					grabbable: true,
 				}  // actor:
 			});  // CreateFromlibrary
 
@@ -93,6 +96,7 @@ export default class Mre01 {
 	private userJoined(user: MRE.User) {
 		// uncomment below to attach object on userJoined instead.
 		this.attachObject(user.id);
+		this.syncFix.userJoined();
 	}
 	private userLeft(user: MRE.User) {
 		// remove attached object when user leaves, so it isn't orphaned.
