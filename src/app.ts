@@ -4,6 +4,7 @@
  */
 
 import * as MRE from '@microsoft/mixed-reality-extension-sdk';
+import { ActionHandler } from '@microsoft/mixed-reality-extension-sdk';
 import { UserSyncFix } from './user-sync-fix'
 
 /**
@@ -39,6 +40,7 @@ export default class Mre01 {
 		let userID: MRE.Guid;
 		let MAX_EGGS: number;
 		let TIMEOUT_MS: number;
+		let running: boolean = false;
 
 		if (this.params["eggs"]) {
 			MAX_EGGS = Number(this.params["eggs"]);
@@ -64,6 +66,9 @@ export default class Mre01 {
 			userIndex = ++userIndex % userListLen;  // count up, but wrap when too many
 			userID = userIdsList[userIndex];  // Get the indexed user id
 
+			// if (this.eggsList.length >= 1) {
+			// 	continue;
+			// }
 			this.kitHipsItem = this.attachedHipsObjects.get(userID);
 			hipsPosition = this.kitHipsItem.transform.app.position;
 			// createfromlibrary (egg)
@@ -76,9 +81,14 @@ export default class Mre01 {
 							position: hipsPosition,
 						}  // local:
 					},  // transform:
+					subscriptions: [ 'transform' ],
 					grabbable: true,
 				}  // actor:
 			});  // CreateFromlibrary
+
+			// Grab the item
+			this.kitEggItem.onGrab("begin", (user) => this.grabBeginHandler(user, this.kitEggItem));
+			this.kitEggItem.onGrab("end", (user) => this.grabEndHandler(user, this.kitEggItem));
 
 			// add to eggsList
 			this.eggsList.push(this.kitEggItem);
@@ -167,6 +177,31 @@ export default class Mre01 {
 			this.attachedEarsObjects.delete(userId);
 			this.attachedHipsObjects.delete(userId);
 		}
+	}
+
+	//     onConnection(handler: (context: Context, params: ParameterSet) => void): this;
+	private grabBeginHandler<MRE,Actor>(user: MRE.User, actorObject?: MRE.Actor) {
+		console.log("Grabbed: user=" + user.id + " object=" + actorObject.id);
+		if (actorObject.attachment) {
+			console.log("... already attached.");
+		}
+		else {
+			console.log("... attaching.");
+			actorObject.attach(user, "right-hand");
+		}
+		return
+	}
+
+	private grabEndHandler<MRE,Actor>(user: MRE.User, actorObject?: MRE.Actor) {
+		console.log("Un-Grabbed: user=" + user.id + " object=" + actorObject.id);
+		if (actorObject.attachment) {
+			console.log("... detaching object.");
+			actorObject.detach();
+		}
+		else {
+			console.log("... not attached");
+		}
+		return
 	}
 
 	async delay(ms: number) {
