@@ -20,9 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="03a46184-9a24-4cbb-b5b0-8ae7f2e2a35d" name="Default Changelist" comment="Functional">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/launch.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/launch.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/server.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -173,11 +174,11 @@
       <screen x="2560" y="25" width="2560" height="1415" />
     </state>
     <state x="3900" y="277" key="CommitChangelistDialog2/2560.25.2560.1415/0.25.2560.1346@2560.25.2560.1415" timestamp="1617557086816" />
-    <state x="2776" y="211" width="1715" height="1089" key="DiffContextDialog" timestamp="1617554567127">
+    <state x="2776" y="211" width="1715" height="1089" key="DiffContextDialog" timestamp="1617651055480">
       <screen x="2560" y="25" width="2560" height="1415" />
     </state>
     <state x="151" y="158" width="1200" height="777" key="DiffContextDialog/0.25.1792.1010@0.25.1792.1010" timestamp="1615083288973" />
-    <state x="2776" y="211" width="1715" height="1089" key="DiffContextDialog/2560.25.2560.1415/0.25.2560.1346@2560.25.2560.1415" timestamp="1617554567127" />
+    <state x="2776" y="211" width="1715" height="1089" key="DiffContextDialog/2560.25.2560.1415/0.25.2560.1346@2560.25.2560.1415" timestamp="1617651055480" />
     <state x="3870" y="414" key="Vcs.Push.Dialog.v2" timestamp="1617557088170">
       <screen x="2560" y="25" width="2560" height="1415" />
     </state>
